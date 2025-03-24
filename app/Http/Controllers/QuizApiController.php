@@ -14,7 +14,13 @@ class QuizApiController extends Controller
     {
         $quiz = Quiz::with('questions.answers')->find($id);
 
-        return response() ->json([
+        if (!$quiz) {
+            return response()->json([
+                'message' => 'Quiz not found',
+            ], 404);
+        }
+
+        return response()->json([
             'message' => 'Quiz retrieved',
             'data' => $quiz,
         ]);
