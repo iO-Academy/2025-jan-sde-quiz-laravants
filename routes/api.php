@@ -5,6 +5,3 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/quizzes/{id}',[QuizApiController::class, 'find']);
-
-
-
