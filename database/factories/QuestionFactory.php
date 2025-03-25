@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Quiz;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,10 @@ class QuestionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'question' => fake()->sentence(10),
+            'hint' => fake()->sentence(5),
+            'points' => fake()->numberBetween(1, 3),
+            'quiz_id' => Quiz::factory(),
         ];
     }
 }
