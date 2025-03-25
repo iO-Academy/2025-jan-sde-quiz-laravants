@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateQuizRequest;
 use App\Models\Quiz;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class QuizApiController extends Controller
 {
@@ -35,7 +34,6 @@ class QuizApiController extends Controller
         ]);
     }
 
-
     public function create(CreateQuizRequest $request): JsonResponse
     {
         $quiz = new Quiz;
@@ -43,7 +41,7 @@ class QuizApiController extends Controller
         $quiz->description = $request->description;
         $quiz->save();
 
-        if (!$quiz->save()) {
+        if (! $quiz->save()) {
             return response()->json([
                 'message' => 'Quiz creation failed',
             ], 500);
