@@ -14,8 +14,6 @@ class AnswerApiTest extends TestCase
 
     public function test_new_answer_created_success(): void
     {
-
-        CreateAnswerRequest::create(1);
         Answer::factory()->create();
 
         $testData = [

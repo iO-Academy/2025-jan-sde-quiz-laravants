@@ -18,7 +18,7 @@ class AnswerApiController extends Controller
         $answer->save();
 
         if (! $answer->save()) {
-            return response() - json([
+            return response()->json([
                 'message' => 'Answer creation failed',
             ], 500);
         }
