@@ -3,14 +3,9 @@
 namespace Tests\Feature;
 
 use App\Models\Answer;
-use App\Models\Question;
-use App\Models\Quiz;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
-
 
 class QuizApiTest extends TestCase
 {
