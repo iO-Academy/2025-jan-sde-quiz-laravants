@@ -21,7 +21,7 @@ class QuestionFactory extends Factory
             'question' => fake()->sentence(10),
             'hint' => fake()->sentence(5),
             'points' => fake()->numberBetween(1, 3),
-            'quiz_id' => Quiz::factory()
+            'quiz_id' => Quiz::factory(),
         ];
     }
 }

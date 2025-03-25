@@ -3,4 +3,4 @@
 use App\Http\Controllers\QuizApiController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/quizzes/{id}',[QuizApiController::class, 'find']);
+Route::get('/quizzes/{id}', [QuizApiController::class, 'find']);
