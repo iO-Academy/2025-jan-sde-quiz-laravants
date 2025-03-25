@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Quiz;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class QuizApiController extends Controller
 {
-
-    public function all():JsonResponse
+    public function all(): JsonResponse
     {
         $quizzes = Quiz::all()->makehidden(['updated_at', 'created_at']);
 
@@ -17,8 +17,8 @@ class QuizApiController extends Controller
             'data' => $quizzes,
         ]);
     }
-    public function find(int $id): JsonResponse
 
+    public function find(int $id): JsonResponse
     {
         $quiz = Quiz::with('questions.answers')->find($id);
 
@@ -34,5 +34,26 @@ class QuizApiController extends Controller
         ]);
     }
 
+    public function create(Request $request): JsonResponse
+    {
+        $request->validate([
+            'name' => 'required|string|min:1',
+            'description' => 'required|string|min:1',
+        ]);
 
+        $quiz = new Quiz;
+        $quiz->name = $request->name;
+        $quiz->description = $request->description;
+        $quiz->save();
+
+        if (! $quiz) {
+            return response()->json([
+                'message' => 'Quiz creation failed',
+            ], 500);
+        }
+
+        return response()->json([
+            'message' => 'Quiz created',
+        ], 201);
+    }
 }
