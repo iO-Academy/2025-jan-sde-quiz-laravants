@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Http\Requests\CreateQuizRequest;
 use App\Models\Answer;
 use App\Models\Quiz;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -58,6 +59,8 @@ class QuizApiTest extends TestCase
 
     public function test_new_quiz_created_success(): void
     {
+        CreateQuizRequest::create(1);
+
         $testData = [
             'name' => 'test',
             'description' => 'test',
