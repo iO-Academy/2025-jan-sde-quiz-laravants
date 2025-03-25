@@ -51,4 +51,28 @@ class QuizApiController extends Controller
             'message' => 'Quiz created',
         ], 201);
     }
+
+    public function update(CreateQuizRequest $request, Quiz $quiz): JsonResponse
+    {
+        $quiz->name = $request->name;
+        $quiz->description = $request->description;
+
+        $quiz->save();
+
+        if (!$quiz) {
+            return response()->json([
+                'message' => 'Quiz not found',
+            ], 404);
+        }
+
+        if (!$quiz->save()) {
+            return response()->json([
+                'message' => 'Quiz editing failed',
+            ], 500);
+        }
+
+        return response()->json([
+            'message' => 'Quiz created'
+        ], 201);
+    }
 }
