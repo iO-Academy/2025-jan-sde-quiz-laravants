@@ -94,4 +94,41 @@ class QuizApiTest extends TestCase
         $response = $this->postJson('/api/quizzes', $testData);
         $response->assertInvalid('description');
     }
+
+    public function test_quiz_updated_success():void
+    {
+        $testData = [
+            'name' => 'test',
+            'description' => 'test',
+        ];
+        $response = $this->putJson('/api/quizzes/1', $testData);
+
+        $response->assertStatus(201)
+            ->assertJson(function (AssertableJson $json) {
+                $json->hasAll(['message']);
+            });
+
+        $this->assertDatabaseHas('quizzes', $testData);
+    }
+
+    public function test_edit_quiz_created_missing_name(): void
+    {
+        $testData = [
+            'description' => 'test',
+        ];
+
+        $response = $this->putJson('/api/quizzes/1', $testData);
+        $response->assertInvalid('name');
+    }
+
+    public function test_edit_quiz_created_missing_description(): void
+    {
+        $testData = [
+            'name' => 'test',
+        ];
+
+        $response = $this->putJson('/api/quizzes/1', $testData);
+        $response->assertInvalid('description');
+    }
+
 }
