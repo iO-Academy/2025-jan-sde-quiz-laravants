@@ -11,17 +11,17 @@ class QuizApiTest extends TestCase
 {
     use DatabaseMigrations;
 
-    public function testGetAllQuizzesSuccess(): void
+    public function test_get_all_quizzes_success(): void
     {
         Quiz::factory()->create();
         $response = $this->get('/api/quizzes');
 
         $response->assertStatus(200)
-            ->assertJson(function (AssertableJson $json){
-               $json->hasAll(['message','data'])
-                   ->has('data', 1, function (AssertableJson $json){
-                       $json->hasAll(['id','name', 'description']);
-                   });
+            ->assertJson(function (AssertableJson $json) {
+                $json->hasAll(['message', 'data'])
+                    ->has('data', 1, function (AssertableJson $json) {
+                        $json->hasAll(['id', 'name', 'description']);
+                    });
             });
     }
 }

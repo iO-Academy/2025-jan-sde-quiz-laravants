@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -13,7 +12,7 @@ class AnswerSeeder extends Seeder
      */
     public function run(): void
     {
-        for($i = 0; $i < 150; $i++){
+        for ($i = 0; $i < 150; $i++) {
             DB::table('answers')->insert([
                 'answer' => fake()->sentence(10),
                 'feedback' => fake()->sentence(2),

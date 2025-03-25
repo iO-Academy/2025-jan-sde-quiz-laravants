@@ -18,7 +18,7 @@ class QuizFactory extends Factory
     {
         return [
             'name' => fake()->words(1, true),
-            'description' => fake()->sentence(7)
+            'description' => fake()->sentence(7),
         ];
     }
 }
