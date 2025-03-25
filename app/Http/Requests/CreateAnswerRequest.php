@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Request;
 
-class CreateQuizRequest extends FormRequest
+class CreateAnswerRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -15,8 +14,9 @@ class CreateQuizRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|min:1',
-            'description' => 'required|string|min:1',
+            'answer' => 'required|string|min:1',
+            'correct' => 'required|boolean',
+            'question_id' => 'required|integer|exists:questions,id',
         ];
     }
 }
