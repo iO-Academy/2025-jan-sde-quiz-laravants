@@ -2,7 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Models\Quiz;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
 class QuestionApiTest extends TestCase
@@ -14,13 +16,19 @@ class QuestionApiTest extends TestCase
      */
     public function test_add_new_question_success(): void
     {
-        $response = $this->postJson('/api/questions', [
-            'question' => 'Will this request work?',
+        $quiz = Quiz::factory()->create();
+
+        $data = ['question' => 'Will this request work?',
             'hint' => "Let's see",
             'points' => 2,
-            'quiz_id' => 2,
-        ]);
-        $response->assertValid(['message']);
+            'quiz_id' => $quiz->id];
+
+        $response = $this->postJson('/api/questions', $data);
+        $response->assertStatus(201)
+            ->assertJson(function (AssertableJson $json) {
+                $json->hasAll(['message']);
+            });
+        $this->assertDatabaseHas('questions', $data);
     }
 
     public function test_add_new_question_fail(): void
