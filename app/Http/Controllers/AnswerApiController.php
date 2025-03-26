@@ -27,4 +27,11 @@ class AnswerApiController extends Controller
             'message' => 'Answer created',
         ], 201);
     }
+
+    public function delete(Answer $answer): JsonResponse
+    {
+        $answer->delete();
+
+        return response()->json(['message' => 'Answer deleted']);
+    }
 }

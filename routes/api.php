@@ -18,3 +18,4 @@ Route::post('/questions', [QuestionApiController::class, 'create']);
 Route::post('/quizzes', [QuizApiController::class, 'create']);
 Route::post('/answers', [AnswerApiController::class, 'create']);
 Route::delete('/questions/{question}', [QuestionApiController::class, 'delete']);
+Route::delete('/answers/{answer}', [AnswerApiController::class, 'delete']);
