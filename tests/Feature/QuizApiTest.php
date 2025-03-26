@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Http\Requests\CreateQuizRequest;
 use App\Models\Answer;
 use App\Models\Quiz;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -54,5 +55,43 @@ class QuizApiTest extends TestCase
         $response = $this->get('/api/quizzes/0');
 
         $response->assertStatus(404);
+    }
+
+    public function test_new_quiz_created_success(): void
+    {
+        CreateQuizRequest::create(1);
+
+        $testData = [
+            'name' => 'test',
+            'description' => 'test',
+        ];
+        $response = $this->postJson('/api/quizzes', $testData);
+
+        $response->assertStatus(201)
+            ->assertJson(function (AssertableJson $json) {
+                $json->hasAll(['message']);
+            });
+
+        $this->assertDatabaseHas('quizzes', $testData);
+    }
+
+    public function test_new_quiz_created_missing_name(): void
+    {
+        $testData = [
+            'description' => 'test',
+        ];
+
+        $response = $this->postJson('/api/quizzes', $testData);
+        $response->assertInvalid('name');
+    }
+
+    public function test_new_quiz_created_missing_description(): void
+    {
+        $testData = [
+            'name' => 'test',
+        ];
+
+        $response = $this->postJson('/api/quizzes', $testData);
+        $response->assertInvalid('description');
     }
 }
