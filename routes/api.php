@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnswerApiController;
 use App\Http\Controllers\QuestionApiController;
 use App\Http\Controllers\QuizApiController;
+use App\Http\Controllers\ScoreApiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/quizzes', [QuizApiController::class, 'all']);
@@ -19,3 +20,4 @@ Route::post('/quizzes', [QuizApiController::class, 'create']);
 Route::post('/answers', [AnswerApiController::class, 'create']);
 Route::delete('/questions/{question}', [QuestionApiController::class, 'delete']);
 Route::delete('/answers/{answer}', [AnswerApiController::class, 'delete']);
+Route::post('/scores', [ScoreApiController::class, 'calculate']);
