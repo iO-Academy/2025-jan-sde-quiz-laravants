@@ -46,9 +46,9 @@ class QuestionApiTest extends TestCase
     public function test_delete_question_success(): void
     {
         $data = Question::factory()->create();
-        $response = $this->deleteJson('/api/questions/' .$data->id);
+        $response = $this->deleteJson('/api/questions/'.$data->id);
         $response->assertStatus(200)
-            ->assertJson(function (AssertableJson $json){
+            ->assertJson(function (AssertableJson $json) {
                 $json->hasAll(['message']);
             });
         $this->assertDatabaseMissing('questions', [
