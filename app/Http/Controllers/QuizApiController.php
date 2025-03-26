@@ -59,12 +59,6 @@ class QuizApiController extends Controller
 
         $quiz->save();
 
-        if (!$quiz) {
-            return response()->json([
-                'message' => 'Quiz not found',
-            ], 404);
-        }
-
         if (!$quiz->save()) {
             return response()->json([
                 'message' => 'Quiz editing failed',
