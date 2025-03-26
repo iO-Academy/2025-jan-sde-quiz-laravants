@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnswerApiController;
 use App\Http\Controllers\QuestionApiController;
 use App\Http\Controllers\QuizApiController;
+use App\Http\Controllers\ScoreApiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/quizzes', [QuizApiController::class, 'all']);
@@ -15,3 +16,5 @@ Route::put('/quizzes/{quiz}', [QuizApiController::class, 'update'])->missing(fun
 Route::post('/questions', [QuestionApiController::class, 'create']);
 Route::post('/quizzes', [QuizApiController::class, 'create']);
 Route::post('/answers', [AnswerApiController::class, 'create']);
+
+Route::post('/scores', [ScoreApiController::class, 'calculate']);
