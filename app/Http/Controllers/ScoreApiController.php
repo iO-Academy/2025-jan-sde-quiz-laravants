@@ -28,32 +28,14 @@ class ScoreApiController extends Controller
 
         $quiz = Quiz::with('questions.answers')->find($id);
 
-//        $answer_id = $request->answers->answer;
-
-
-
         foreach($answers as $answer) {
             $questions = $quiz->questions->find($answer['question']);
             $answer_result = $questions->answers->find($answer['answer']);
             if($answer_result->correct == 1){
                 $score['correct_count']++;
+                $score['points'] += $questions->points;
             }
         }
-
-
-
-        // Clue
-//        $question = $quiz->questions->find(2);
-//        $question->answers->find(3);
-
-//        foreach($answers as $answer){
-//            if($->correct == 1) {
-//                $score['correct_count']++;
-//            }
-//        }
-
-        //id of the answer
-
 
         foreach ($quiz->questions as $question) {
             $score['available_points'] += $question->points;
