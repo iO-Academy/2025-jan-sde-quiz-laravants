@@ -2,20 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ScoreRequest;
 use App\Models\Quiz;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ScoreApiController extends Controller
 {
-    public function calculate(Request $request):JsonResponse
+    public function calculate(ScoreRequest $request):JsonResponse
     {
-//        $request->validate([
-//            'quiz_id' => 'required|integer',
-//            'answers' => 'required|array',
-//            'answers.*.question_id' => 'required|integer'
-//        ]);
-
         $score = [
             'question_count' => 0,
             'correct_count' => 0,
