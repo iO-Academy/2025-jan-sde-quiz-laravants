@@ -37,7 +37,7 @@ class ScoreApiController extends Controller
 
         }
 
-return response()->json([
+        return response()->json([
             'message' => 'Score calculated',
             'data' => $score,
         ]);
