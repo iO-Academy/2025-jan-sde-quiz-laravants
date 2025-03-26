@@ -63,4 +63,17 @@ class AnswerApiTest extends TestCase
         $response = $this->postJson('/api/answers', $testData);
         $response->assertInvalid('question_id');
     }
+
+    public function test_delete_answer_success(): void
+    {
+        $data = Answer::factory()->create();
+        $response = $this->deleteJson('/api/answers/'.$data->id);
+        $response->assertStatus(200)
+            ->assertJson(function (AssertableJson $json) {
+                $json->hasAll(['message']);
+            });
+        $this->assertDatabaseMissing('answers', [
+            'id' => $data->id,
+        ]);
+    }
 }
