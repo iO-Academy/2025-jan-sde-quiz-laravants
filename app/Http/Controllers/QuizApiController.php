@@ -34,7 +34,6 @@ class QuizApiController extends Controller
         ]);
     }
 
-
     public function create(CreateQuizRequest $request): JsonResponse
     {
         $quiz = new Quiz;

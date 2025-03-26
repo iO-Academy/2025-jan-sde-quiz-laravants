@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Question;
 use App\Models\Quiz;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Testing\Fluent\AssertableJson;
@@ -40,5 +41,18 @@ class QuestionApiTest extends TestCase
             'quiz_id' => null,
         ]);
         $response->assertValid(['message', 'errors']);
+    }
+
+    public function test_delete_question_success(): void
+    {
+        $data = Question::factory()->create();
+        $response = $this->deleteJson('/api/questions/' .$data->id);
+        $response->assertStatus(200)
+            ->assertJson(function (AssertableJson $json){
+                $json->hasAll(['message']);
+            });
+        $this->assertDatabaseMissing('questions', [
+            'id' => $data->id,
+        ]);
     }
 }
