@@ -97,6 +97,8 @@ class QuizApiTest extends TestCase
 
     public function test_quiz_updated_success():void
     {
+        Quiz::factory()->create();
+
         $testData = [
             'name' => 'test',
             'description' => 'test',
@@ -113,6 +115,8 @@ class QuizApiTest extends TestCase
 
     public function test_edit_quiz_created_missing_name(): void
     {
+        Quiz::factory()->create();
+
         $testData = [
             'description' => 'test',
         ];
@@ -123,6 +127,8 @@ class QuizApiTest extends TestCase
 
     public function test_edit_quiz_created_missing_description(): void
     {
+        Quiz::factory()->create();
+
         $testData = [
             'name' => 'test',
         ];
