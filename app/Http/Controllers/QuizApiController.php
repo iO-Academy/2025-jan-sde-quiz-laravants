@@ -34,7 +34,6 @@ class QuizApiController extends Controller
         ]);
     }
 
-
     public function create(CreateQuizRequest $request): JsonResponse
     {
         $quiz = new Quiz;
@@ -60,14 +59,14 @@ class QuizApiController extends Controller
 
         $quiz->save();
 
-        if (!$quiz->save()) {
+        if (! $quiz->save()) {
             return response()->json([
                 'message' => 'Quiz editing failed',
             ], 500);
         }
 
         return response()->json([
-            'message' => 'Quiz created'
+            'message' => 'Quiz created',
         ], 201);
     }
 }

@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 // use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Models\Quiz;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase

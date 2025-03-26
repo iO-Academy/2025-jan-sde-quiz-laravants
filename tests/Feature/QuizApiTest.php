@@ -95,7 +95,7 @@ class QuizApiTest extends TestCase
         $response->assertInvalid('description');
     }
 
-    public function test_quiz_updated_success():void
+    public function test_quiz_updated_success(): void
     {
         Quiz::factory()->create();
 
@@ -136,5 +136,4 @@ class QuizApiTest extends TestCase
         $response = $this->putJson('/api/quizzes/1', $testData);
         $response->assertInvalid('description');
     }
-
 }
