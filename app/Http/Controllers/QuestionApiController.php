@@ -32,4 +32,25 @@ class QuestionApiController extends Controller
 
         return response()->json(['message' => 'Question deleted']);
     }
+
+
+    public function update(CreateQuestionRequest $request, Question $question): JsonResponse
+    {
+        $question->question = $request->question;
+        $question->points = $request->points;
+        $question->hint = $request->hint;
+        $question->quiz_id = $request->quiz_id;
+
+        $question->save();
+
+        if (! $question->save()) {
+            return response()->json([
+                'message' => 'Question editing failed',
+            ], 500);
+        }
+
+        return response()->json([
+            'message' => 'Question edited',
+        ], 201);
+    }
 }

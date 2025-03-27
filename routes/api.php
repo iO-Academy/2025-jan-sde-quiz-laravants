@@ -15,6 +15,12 @@ Route::put('/quizzes/{quiz}', [QuizApiController::class, 'update'])->missing(fun
     ], 404);
 });
 
+Route::put('/questions/{question}', [QuestionApiController::class, 'update'])->missing(function () {
+    return response()->json([
+        'message' => 'Question not found',
+    ], 404);
+});
+
 Route::post('/questions', [QuestionApiController::class, 'create']);
 Route::post('/quizzes', [QuizApiController::class, 'create']);
 Route::post('/answers', [AnswerApiController::class, 'create']);
