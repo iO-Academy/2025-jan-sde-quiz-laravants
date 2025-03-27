@@ -33,7 +33,6 @@ class QuestionApiController extends Controller
         return response()->json(['message' => 'Question deleted']);
     }
 
-
     public function update(CreateQuestionRequest $request, Question $question): JsonResponse
     {
         $question->question = $request->question;

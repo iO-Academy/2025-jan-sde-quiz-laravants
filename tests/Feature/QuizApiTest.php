@@ -117,7 +117,7 @@ class QuizApiTest extends TestCase
     public function test_edit_quiz_created_missing_name(): void
     {
         Quiz::factory()->create();
-      
+
         $testData = [
             'description' => 'test',
         ];

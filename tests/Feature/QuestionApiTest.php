@@ -55,4 +55,67 @@ class QuestionApiTest extends TestCase
             'id' => $data->id,
         ]);
     }
+
+    public function test_question_edited_success(): void
+    {
+        Question::factory()->create();
+
+        $testData = [
+            'question' => 'test',
+            'points' => 1,
+            'quiz_id' => 1,
+            'hint' => 'test',
+        ];
+        $response = $this->putJson('/api/questions/1', $testData);
+
+        $response->assertStatus(201)
+            ->assertJson(function (AssertableJson $json) {
+                $json->hasAll(['message']);
+            });
+
+        $this->assertDatabaseHas('questions', $testData);
+    }
+
+    public function test_edit_question_missing_question(): void
+    {
+        Question::factory()->create();
+
+        $testData = [
+            'points' => 1,
+            'quiz_id' => 1,
+            'hint' => 'test',
+        ];
+
+        $response = $this->putJson('/api/questions/1', $testData);
+        $response->assertInvalid('question');
+    }
+
+    public function test_edit_question_missing_points(): void
+    {
+        Question::factory()->create();
+
+        $testData = [
+            'question' => 'test',
+            'quiz_id' => 1,
+            'hint' => 'test',
+        ];
+
+        $response = $this->putJson('/api/questions/1', $testData);
+        $response->assertInvalid('points');
+    }
+
+    public function test_edit_question_missing_quiz_id(): void
+    {
+        Question::factory()->create();
+
+        $testData = [
+            'question' => 'test',
+            'points' => 1,
+            'hint' => 'test',
+        ];
+
+        $response = $this->putJson('/api/questions/1', $testData);
+        $response->assertInvalid('quiz_id');
+
+    }
 }
