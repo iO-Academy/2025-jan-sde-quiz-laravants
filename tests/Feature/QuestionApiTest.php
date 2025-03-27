@@ -63,7 +63,6 @@ class QuestionApiTest extends TestCase
         $testData = [
             'question' => 'test',
             'points' => 1,
-            'quiz_id' => 1,
             'hint' => 'test',
         ];
         $response = $this->putJson('/api/questions/1', $testData);
@@ -82,7 +81,6 @@ class QuestionApiTest extends TestCase
 
         $testData = [
             'points' => 1,
-            'quiz_id' => 1,
             'hint' => 'test',
         ];
 
@@ -96,7 +94,6 @@ class QuestionApiTest extends TestCase
 
         $testData = [
             'question' => 'test',
-            'quiz_id' => 1,
             'hint' => 'test',
         ];
 
@@ -104,18 +101,4 @@ class QuestionApiTest extends TestCase
         $response->assertInvalid('points');
     }
 
-    public function test_edit_question_missing_quiz_id(): void
-    {
-        Question::factory()->create();
-
-        $testData = [
-            'question' => 'test',
-            'points' => 1,
-            'hint' => 'test',
-        ];
-
-        $response = $this->putJson('/api/questions/1', $testData);
-        $response->assertInvalid('quiz_id');
-
-    }
 }

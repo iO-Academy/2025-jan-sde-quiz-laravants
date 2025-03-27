@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateQuestionRequest;
+use App\Http\Requests\QuestionRequest;
 use App\Models\Question;
 use Illuminate\Http\JsonResponse;
 
 class QuestionApiController extends Controller
 {
-    public function create(CreateQuestionRequest $request): JsonResponse
+    public function create(QuestionRequest $request): JsonResponse
     {
         $newQuestion = new Question;
 
@@ -33,12 +33,11 @@ class QuestionApiController extends Controller
         return response()->json(['message' => 'Question deleted']);
     }
 
-    public function update(CreateQuestionRequest $request, Question $question): JsonResponse
+    public function update(QuestionRequest $request, Question $question): JsonResponse
     {
         $question->question = $request->question;
         $question->points = $request->points;
         $question->hint = $request->hint;
-        $question->quiz_id = $request->quiz_id;
 
         $question->save();
 
