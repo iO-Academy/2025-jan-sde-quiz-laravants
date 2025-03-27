@@ -76,4 +76,47 @@ class AnswerApiTest extends TestCase
             'id' => $data->id,
         ]);
     }
+
+    public function test_answer_updated_success(): void
+    {
+        Answer::factory()->create();
+
+        $testData = [
+            'answer' => 'test',
+            'correct' => 1,
+        ];
+
+        $response = $this->putJson('/api/answers/1', $testData);
+
+        $response->assertStatus(200)
+            ->assertJson(function (AssertableJson $json) {
+                $json->hasAll(['message']);
+            });
+
+        $this->assertDatabaseHas('answers', $testData);
+    }
+
+    public function test_answer_updated_missing_answer(): void
+    {
+        Answer::factory()->create();
+
+        $testData = [
+            'correct' => 1,
+        ];
+
+        $response = $this->putJson('/api/answers/1', $testData);
+        $response->assertInvalid('answer');
+    }
+
+    public function test_answer_updated_missing_correct(): void
+    {
+        Answer::factory()->create();
+
+        $testData = [
+            'answer' => 'test',
+        ];
+
+        $response = $this->putJson('/api/answers/1', $testData);
+        $response->assertInvalid('correct');
+    }
 }
