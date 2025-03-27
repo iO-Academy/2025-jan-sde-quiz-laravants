@@ -13,10 +13,15 @@ class CreateAnswerRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'answer' => 'required|string|min:1',
             'correct' => 'required|boolean',
-            'question_id' => 'required|integer|exists:questions,id',
         ];
+
+        if ($this->method() === 'POST') {
+            $rules['question_id'] = 'required|integer|exists:questions,id';
+        }
+
+        return $rules;
     }
 }

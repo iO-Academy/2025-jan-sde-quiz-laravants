@@ -34,4 +34,23 @@ class AnswerApiController extends Controller
 
         return response()->json(['message' => 'Answer deleted']);
     }
+
+    public function update(CreateAnswerRequest $request, Answer $answer): JsonResponse
+    {
+
+        $answer->answer = $request->answer;
+        $answer->correct = $request->correct;
+
+        $answer->save();
+
+        if (! $answer->save()) {
+            return response()->json([
+                'message' => 'Answer editing failed',
+            ], 500);
+        }
+
+        return response()->json([
+            'message' => 'Answer edited',
+        ]);
+    }
 }
