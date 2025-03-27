@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateAnswerRequest extends FormRequest
+class AnswerRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
