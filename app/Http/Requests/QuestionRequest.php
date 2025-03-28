@@ -12,10 +12,10 @@ class QuestionRequest extends FormRequest
         $rules = [
             'question' => 'required|string|max:70',
             'hint' => 'nullable|string|max:70',
-            'points' => 'required|integer'
+            'points' => 'required|integer',
         ];
 
-        if ($this->method() === 'POST'){
+        if ($this->method() === 'POST') {
             $rules['quiz_id'] = 'exists:quizzes,id|required|integer';
         }
 

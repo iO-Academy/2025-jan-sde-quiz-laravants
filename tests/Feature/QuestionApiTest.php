@@ -100,5 +100,4 @@ class QuestionApiTest extends TestCase
         $response = $this->putJson('/api/questions/1', $testData);
         $response->assertInvalid('points');
     }
-
 }
